@@ -37,7 +37,6 @@ public class CryptoCurrencyApiService implements ICryptoCurrencyApiService {
     */
     @Override
     public JsonArray fetchAllCryptoCurrencies(String url) {
-        ObjectMapper objectMapper = beanConfiguration.objectMapper();
         OkHttpClient okHttpClient = beanConfiguration.okHttpClient();
         JsonArray cryptoCurrencies = new JsonArray();
         Request request = new Request.Builder()
@@ -53,6 +52,7 @@ public class CryptoCurrencyApiService implements ICryptoCurrencyApiService {
             cryptoCurrencies = responseJson.getAsJsonArray("data");
 
             return cryptoCurrencies;
+
         } catch (IOException e) {
             e.printStackTrace();
         }

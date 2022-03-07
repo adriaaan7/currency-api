@@ -11,7 +11,8 @@ public interface ICryptoCurrencyService {
 
     CryptoCurrency getCryptoCurrencyByName(String currencyName);
 
-    void saveCryptoCurrency(CryptoCurrency cryptoCurrency);
+    CryptoCurrency saveCryptoCurrency(CryptoCurrency cryptoCurrency);
 
     void updateAllCryptoCurrencies(JsonArray cryptoCurrencyArray);
+
 }

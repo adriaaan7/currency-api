@@ -1,6 +1,7 @@
 package com.adi.project.controller;
 
 import com.adi.project.service.CryptoCurrencyApiService;
+import com.google.gson.JsonArray;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.Mapping;
@@ -19,7 +20,7 @@ public class CryptoCurrencyApiController {
 
     @GetMapping("/cryptoCurrencies")
     public String getCryptoCurrenciesApiResponse(){
-        String test = cryptoCurrencyApiService.fetchAllCryptoCurrencies(allCryptoCurrenciesURL);
+        JsonArray test = cryptoCurrencyApiService.fetchAllCryptoCurrencies(allCryptoCurrenciesURL);
         System.out.println(test);
         return "index";
     }

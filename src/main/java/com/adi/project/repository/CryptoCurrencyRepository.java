@@ -17,5 +17,4 @@ public interface CryptoCurrencyRepository extends JpaRepository<CryptoCurrency, 
     @Query(value = "SELECT * FROM cryptoCurrency WHERE cryptoCurrency.name=:currencyName", nativeQuery = true)
     CryptoCurrency getCryptoCurrencyByName(@Param("currencyName") String currencyName);
 
-    boolean existsCryptoCurrenciesByName(String name);
 }

@@ -14,11 +14,6 @@ import java.net.URL;
 public class BeanConfiguration {
 
     @Bean
-    public ObjectMapper objectMapper() {
-        return new ObjectMapper();
-    }
-
-    @Bean
     public StringBuilder stringBuilder() {
         return new StringBuilder();
     }

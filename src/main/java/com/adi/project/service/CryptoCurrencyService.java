@@ -29,8 +29,9 @@ public class CryptoCurrencyService implements ICryptoCurrencyService {
     }
 
     @Override
-    public void saveCryptoCurrency(CryptoCurrency cryptoCurrency) {
-        cryptoCurrencyRepository.save(cryptoCurrency);
+    public CryptoCurrency saveCryptoCurrency(CryptoCurrency cryptoCurrency) {
+        cryptoCurrencyRepository.findById(cryptoCurrency.getId()).orElseThrow();
+        return cryptoCurrencyRepository.save(cryptoCurrency);
     }
 
     @Override
@@ -38,9 +39,11 @@ public class CryptoCurrencyService implements ICryptoCurrencyService {
         for(int i = 0; i < cryptoCurrencyArray.size(); i++){
             Gson gson = new Gson();
             CryptoCurrency obj = gson.fromJson(cryptoCurrencyArray.get(i), CryptoCurrency.class);
-            if(cryptoCurrencyRepository.existsCryptoCurrenciesByName(obj.getName()))
+            if(cryptoCurrencyRepository.getAllCryptoCurrencies().contains(obj))
                 continue;
             saveCryptoCurrency(obj);
+
         }
     }
+
 }
