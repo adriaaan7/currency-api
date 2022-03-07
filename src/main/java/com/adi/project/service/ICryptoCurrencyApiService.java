@@ -1,7 +1,9 @@
 package com.adi.project.service;
 
+import com.google.gson.JsonArray;
+
 import java.util.Map;
 
 public interface ICryptoCurrencyApiService {
-    String fetchAllCryptoCurrencies(String url);
+    JsonArray fetchAllCryptoCurrencies(String url);
 }

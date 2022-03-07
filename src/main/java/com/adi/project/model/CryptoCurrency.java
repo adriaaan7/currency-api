@@ -4,8 +4,8 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-@Table(name = "cryptoCurrency")
 @Entity
+@Table(name = "cryptoCurrencies")
 public class CryptoCurrency {
 
     @Id
@@ -15,7 +15,7 @@ public class CryptoCurrency {
     private String name;
     private int rank;
     private String symbol;
-    private BigDecimal price;
+    private BigDecimal priceUsd;
     private LocalDate date;
     private BigDecimal rateOfChange;
 
@@ -54,12 +54,12 @@ public class CryptoCurrency {
         this.symbol = symbol;
     }
 
-    public BigDecimal getPrice() {
-        return price;
+    public BigDecimal getPriceUsd() {
+        return priceUsd;
     }
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
+    public void setPriceUsd(BigDecimal priceUsd) {
+        this.priceUsd = priceUsd;
     }
 
     public LocalDate getDate() {
@@ -78,3 +78,4 @@ public class CryptoCurrency {
         this.rateOfChange = rateOfChange;
     }
 }
+
