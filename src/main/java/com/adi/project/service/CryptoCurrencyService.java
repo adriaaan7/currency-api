@@ -41,8 +41,8 @@ public class CryptoCurrencyService implements ICryptoCurrencyService {
     }
 
     @Override
-    public void updateAllCryptoCurrencies(JsonArray cryptoCurrencyArray) {
-        cryptoCurrencyRepository.saveAll(
+    public List<CryptoCurrency> updateAllCryptoCurrencies() {
+        return cryptoCurrencyRepository.saveAll(
                 jsonParser.parseJsonElementToCryptoCurrency(
                 cryptoCurrencyApiService.fetchAllCryptoCurrencies(url)));
     }

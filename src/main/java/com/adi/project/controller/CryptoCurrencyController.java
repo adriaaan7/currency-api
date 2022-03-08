@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 @Controller
 @RequestMapping("/api/v2")
@@ -34,6 +35,12 @@ public class CryptoCurrencyController {
         cryptoCurrency.setDate(date);
         cryptoCurrency.setRateOfChange(rateOfChange);
         return cryptoCurrencyService.saveCryptoCurrency(cryptoCurrency);
+    }
+
+    @PutMapping("/update/all")
+    @ResponseBody
+    public List<CryptoCurrency> updateAllCryptoCurrencies(){
+        return cryptoCurrencyService.updateAllCryptoCurrencies();
     }
 
     @GetMapping("/")

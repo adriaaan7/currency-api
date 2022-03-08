@@ -8,9 +8,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import com.adi.project.configuration.BeanConfiguration;
 
 @SpringBootApplication
-@ComponentScan({"com.adi.project.service", "com.adi.project.controller", "com.adi.project.configuration"})
-@EntityScan({"com.adi.project.model"})
-@EnableJpaRepositories({"com.adi.project.repository"})
 public class ProjectApplication {
 
     public static void main(String[] args) {

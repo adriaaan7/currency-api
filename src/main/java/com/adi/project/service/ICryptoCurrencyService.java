@@ -13,6 +13,6 @@ public interface ICryptoCurrencyService {
 
     CryptoCurrency saveCryptoCurrency(CryptoCurrency cryptoCurrency);
 
-    void updateAllCryptoCurrencies(JsonArray cryptoCurrencyArray);
+    List<CryptoCurrency> updateAllCryptoCurrencies();
 
 }
