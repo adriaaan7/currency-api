@@ -31,9 +31,7 @@ public class CryptoCurrencyApiService implements ICryptoCurrencyApiService {
     }
 
     /*
-        Returns whole content of the response from the provided url
-        #TODO
-        SELECT ALL KEYS AND MATCH WITH THEIR VALUES
+        Returns whole content of the response from the provided url in form of JsonArray
     */
     @Override
     public JsonArray fetchAllCryptoCurrencies(String url) {
