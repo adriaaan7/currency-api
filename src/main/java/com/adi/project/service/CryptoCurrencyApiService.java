@@ -26,6 +26,10 @@ public class CryptoCurrencyApiService implements ICryptoCurrencyApiService {
 
     private final BeanConfiguration beanConfiguration;
 
+    // ONLY PUBLIC FOR NOW
+    // WILL BE EXPORTED AS ENV VAR
+    private final String apiKey = "e92b7d3f-c194-4cbb-bb25-708710e1a14a";
+
     public CryptoCurrencyApiService(BeanConfiguration beanConfiguration) {
         this.beanConfiguration = beanConfiguration;
     }
@@ -40,6 +44,7 @@ public class CryptoCurrencyApiService implements ICryptoCurrencyApiService {
         Request request = new Request.Builder()
                 .url(url)
                 .header("Accept-Encoding", "deflate")
+                .header("Authorization", apiKey)
                 .build();
         try {
             Response response = okHttpClient.newCall(request).execute();
