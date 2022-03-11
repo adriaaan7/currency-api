@@ -67,7 +67,7 @@ public class CryptoCurrencyService implements ICryptoCurrencyService {
                     c.getRank(), c.getSymbol(),
                     c.getPriceUsd(), c.getRateOfChange());
         }
-
-        return (count == list.size()) ? list : null;
+        return list;
+        //return (count == list.size()) ? list : null;
     }
 }

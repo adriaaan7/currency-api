@@ -40,7 +40,7 @@ public class CryptoCurrencyController {
     @PutMapping("/update/all")
     @ResponseBody
     public List<CryptoCurrency> updateAllCryptoCurrencies(){
-        return cryptoCurrencyService.updateAllCryptoCurrencies();
+        return cryptoCurrencyService.initAllCryptoCurrencies();
     }
 
     @GetMapping("/")
