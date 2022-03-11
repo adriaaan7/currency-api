@@ -1,25 +1,16 @@
 package com.adi.project.service;
 
 import com.adi.project.configuration.BeanConfiguration;
-import com.adi.project.model.CryptoCurrency;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.json.JsonMapper;
-import com.fasterxml.jackson.databind.util.JSONPObject;
-import com.google.gson.*;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import okhttp3.ResponseBody;
 import org.springframework.stereotype.Service;
-import org.springframework.web.util.UriUtils;
 
 import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.List;
 
 @Service
 public class CryptoCurrencyApiService implements ICryptoCurrencyApiService {
@@ -35,11 +26,12 @@ public class CryptoCurrencyApiService implements ICryptoCurrencyApiService {
     }
 
     /*
-        Returns whole content of the response from the provided url in form of JsonArray
+        Returns content of data field of the response from the provided url
+        in form of JsonArray
     */
     @Override
     public JsonArray fetchAllCryptoCurrencies(String url) {
-        OkHttpClient okHttpClient = beanConfiguration.okHttpClient();
+        OkHttpClient okHttpClient = new OkHttpClient();
         JsonArray cryptoCurrencies = new JsonArray();
         Request request = new Request.Builder()
                 .url(url)

@@ -13,14 +13,5 @@ import java.net.URL;
 @Configuration
 public class BeanConfiguration {
 
-    @Bean
-    public StringBuilder stringBuilder() {
-        return new StringBuilder();
-    }
-
-    @Bean
-    public OkHttpClient okHttpClient(){
-        return new OkHttpClient();
-    }
 
 }

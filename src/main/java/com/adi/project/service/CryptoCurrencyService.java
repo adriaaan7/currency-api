@@ -8,6 +8,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -41,10 +42,32 @@ public class CryptoCurrencyService implements ICryptoCurrencyService {
     }
 
     @Override
-    public List<CryptoCurrency> updateAllCryptoCurrencies() {
+    public List<CryptoCurrency> initAllCryptoCurrencies() {
         return cryptoCurrencyRepository.saveAll(
                 jsonParser.parseJsonElementToCryptoCurrency(
                 cryptoCurrencyApiService.fetchAllCryptoCurrencies(url)));
     }
 
+    @Override
+    public void updateCryptoCurrency(Long id, String name,
+                                     int rank, String symbol,
+                                     BigDecimal priceUsd, BigDecimal rateOfChange) {
+        cryptoCurrencyRepository.updateCryptoCurrency(id, name, rank, symbol, priceUsd, rateOfChange);
+    }
+
+    @Override
+    public List<CryptoCurrency> updateAllCryptoCurrencies() {
+        List<CryptoCurrency> list = jsonParser.parseJsonElementToCryptoCurrency(
+                cryptoCurrencyApiService.fetchAllCryptoCurrencies(url));
+        // checking if whole list was updated
+        int count = 0;
+        for (int i = 0; i < list.size(); i++, count++){
+            CryptoCurrency c = list.get(i);
+            updateCryptoCurrency(c.getId(), c.getName(),
+                    c.getRank(), c.getSymbol(),
+                    c.getPriceUsd(), c.getRateOfChange());
+        }
+
+        return (count == list.size()) ? list : null;
+    }
 }
