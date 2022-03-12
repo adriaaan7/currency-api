@@ -44,7 +44,8 @@ public class CryptoCurrencyController {
     }
 
     @GetMapping("/")
-    public String getMainPage(){
-        return "index";
+    @ResponseBody
+    public List<CryptoCurrency> getMainPage(){
+        return cryptoCurrencyService.getAllCryptoCurrencies();
     }
 }
