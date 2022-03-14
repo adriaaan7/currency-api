@@ -8,6 +8,7 @@ import com.google.gson.JsonObject;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -17,7 +18,10 @@ public class CryptoCurrencyApiService implements ICryptoCurrencyApiService {
 
     // ONLY PUBLIC FOR NOW
     // WILL BE EXPORTED AS ENV VAR
-    private final String apiKey = "e92b7d3f-c194-4cbb-bb25-708710e1a14a";
+    //private final String apiKey = "e92b7d3f-c194-4cbb-bb25-708710e1a14a";
+    @Value("${coinCapApiKey}")
+    private String apiKey;
+    
     private final String cryptoCurrenciesURL = "https://api.coincap.io/v2/assets";
 
     /*
