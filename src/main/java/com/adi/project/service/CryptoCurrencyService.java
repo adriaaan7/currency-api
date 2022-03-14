@@ -3,9 +3,6 @@ package com.adi.project.service;
 import com.adi.project.json.JsonParser;
 import com.adi.project.model.CryptoCurrency;
 import com.adi.project.repository.CryptoCurrencyRepository;
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
