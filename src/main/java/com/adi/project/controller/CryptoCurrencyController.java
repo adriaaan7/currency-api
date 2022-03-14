@@ -11,6 +11,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/api/v2")
+@CrossOrigin
 public class CryptoCurrencyController {
 
     private final CryptoCurrencyService cryptoCurrencyService;
@@ -40,11 +41,12 @@ public class CryptoCurrencyController {
     @PutMapping("/update/all")
     @ResponseBody
     public List<CryptoCurrency> updateAllCryptoCurrencies(){
-        return cryptoCurrencyService.updateAllCryptoCurrencies();
+        return cryptoCurrencyService.initAllCryptoCurrencies();
     }
 
-    @GetMapping("/")
-    public String getMainPage(){
-        return "index";
+    @GetMapping("/all")
+    @ResponseBody
+    public List<CryptoCurrency> getMainPage(){
+        return cryptoCurrencyService.getAllCryptoCurrencies();
     }
 }

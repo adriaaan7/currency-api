@@ -5,7 +5,11 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
+<<<<<<< HEAD
 @Table(name = "cryptoCurrency")
+=======
+@Table(name = "crypto_currencies")
+>>>>>>> cfe71c707428cfa362aebcfd4cf3e170d416287a
 public class CryptoCurrency {
 
     @Id

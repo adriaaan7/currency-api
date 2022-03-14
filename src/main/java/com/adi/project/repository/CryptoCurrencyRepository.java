@@ -14,7 +14,7 @@ import java.util.List;
 @Repository
 public interface CryptoCurrencyRepository extends JpaRepository<CryptoCurrency, Long> {
 
-    @Query(value = "SELECT * FROM cryptoCurrency", nativeQuery = true)
+    @Query(value = "SELECT * FROM crypto_currencies", nativeQuery = true)
     List<CryptoCurrency> getAllCryptoCurrencies();
 
     @Query(value = "SELECT * FROM cryptoCurrency WHERE cryptoCurrency.name=:currencyName", nativeQuery = true)

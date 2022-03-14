@@ -15,26 +15,21 @@ import java.io.IOException;
 @Service
 public class CryptoCurrencyApiService implements ICryptoCurrencyApiService {
 
-    private final BeanConfiguration beanConfiguration;
-
     // ONLY PUBLIC FOR NOW
     // WILL BE EXPORTED AS ENV VAR
     private final String apiKey = "e92b7d3f-c194-4cbb-bb25-708710e1a14a";
-
-    public CryptoCurrencyApiService(BeanConfiguration beanConfiguration) {
-        this.beanConfiguration = beanConfiguration;
-    }
+    private final String cryptoCurrenciesURL = "https://api.coincap.io/v2/assets";
 
     /*
         Returns content of data field of the response from the provided url
         in form of JsonArray
     */
     @Override
-    public JsonArray fetchAllCryptoCurrencies(String url) {
+    public JsonArray fetchAllCryptoCurrencies( ) {
         OkHttpClient okHttpClient = new OkHttpClient();
         JsonArray cryptoCurrencies = new JsonArray();
         Request request = new Request.Builder()
-                .url(url)
+                .url(cryptoCurrenciesURL)
                 .header("Accept-Encoding", "deflate")
                 .header("Authorization", apiKey)
                 .build();
@@ -54,5 +49,9 @@ public class CryptoCurrencyApiService implements ICryptoCurrencyApiService {
 
 
         return cryptoCurrencies;
+    }
+
+    public String getCryptoCurrenciesURL() {
+        return cryptoCurrenciesURL;
     }
 }

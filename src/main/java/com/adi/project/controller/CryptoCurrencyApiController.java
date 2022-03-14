@@ -20,7 +20,7 @@ public class CryptoCurrencyApiController {
 
     @GetMapping("/cryptoCurrencies")
     public String getCryptoCurrenciesApiResponse(){
-        JsonArray test = cryptoCurrencyApiService.fetchAllCryptoCurrencies(allCryptoCurrenciesURL);
+        JsonArray test = cryptoCurrencyApiService.fetchAllCryptoCurrencies();
         System.out.println(test);
         return "index";
     }

@@ -17,7 +17,6 @@ public class CryptoCurrencyService implements ICryptoCurrencyService {
     private final CryptoCurrencyRepository cryptoCurrencyRepository;
     private final JsonParser jsonParser;
     private final CryptoCurrencyApiService cryptoCurrencyApiService;
-    private final String url = "https://api.coincap.io/v2/assets";
 
     public CryptoCurrencyService(CryptoCurrencyRepository cryptoCurrencyRepository, JsonParser jsonParser, CryptoCurrencyApiService cryptoCurrencyApiService) {
         this.cryptoCurrencyRepository = cryptoCurrencyRepository;
@@ -27,7 +26,7 @@ public class CryptoCurrencyService implements ICryptoCurrencyService {
 
     @Override
     public List<CryptoCurrency> getAllCryptoCurrencies() {
-        return cryptoCurrencyRepository.getAllCryptoCurrencies();
+        return cryptoCurrencyRepository.findAll();
     }
 
     @Override
@@ -45,7 +44,7 @@ public class CryptoCurrencyService implements ICryptoCurrencyService {
     public List<CryptoCurrency> initAllCryptoCurrencies() {
         return cryptoCurrencyRepository.saveAll(
                 jsonParser.parseJsonElementToCryptoCurrency(
-                cryptoCurrencyApiService.fetchAllCryptoCurrencies(url)));
+                cryptoCurrencyApiService.fetchAllCryptoCurrencies()));
     }
 
     @Override
@@ -58,7 +57,7 @@ public class CryptoCurrencyService implements ICryptoCurrencyService {
     @Override
     public List<CryptoCurrency> updateAllCryptoCurrencies() {
         List<CryptoCurrency> list = jsonParser.parseJsonElementToCryptoCurrency(
-                cryptoCurrencyApiService.fetchAllCryptoCurrencies(url));
+                cryptoCurrencyApiService.fetchAllCryptoCurrencies());
         // checking if whole list was updated
         int count = 0;
         for (int i = 0; i < list.size(); i++, count++){
@@ -67,7 +66,7 @@ public class CryptoCurrencyService implements ICryptoCurrencyService {
                     c.getRank(), c.getSymbol(),
                     c.getPriceUsd(), c.getRateOfChange());
         }
-
-        return (count == list.size()) ? list : null;
+        return list;
+        //return (count == list.size()) ? list : null;
     }
 }
