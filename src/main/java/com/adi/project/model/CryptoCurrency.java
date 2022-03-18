@@ -31,6 +31,14 @@ public class CryptoCurrency {
         this.rateOfChange = rateOfChange;
     }
 
+    public CryptoCurrency(String name, int rank, String symbol, BigDecimal priceUsd, BigDecimal rateOfChange) {
+        this.name = name;
+        this.rank = rank;
+        this.symbol = symbol;
+        this.priceUsd = priceUsd;
+        this.rateOfChange = rateOfChange;
+    }
+
     public Long getId() {
         return id;
     }
