@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-@Configuration
+//@Configuration
 public class BeanConfiguration {
 
 
