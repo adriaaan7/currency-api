@@ -1,6 +1,6 @@
 package com.adi.project.service;
 
-import com.adi.project.json.JsonParser;
+import com.adi.project.converter.JsonParser;
 import com.adi.project.model.CryptoCurrency;
 import com.adi.project.repository.CryptoCurrencyRepository;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package com.adi.project.json;
+package com.adi.project.converter;
 
 import com.adi.project.model.CryptoCurrency;
 import com.google.gson.JsonArray;
