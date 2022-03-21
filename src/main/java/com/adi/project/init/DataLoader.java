@@ -7,6 +7,7 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
+import java.io.File;
 import java.util.List;
 
 @Component
@@ -23,11 +24,7 @@ public class DataLoader implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         cryptoCurrencyService.initAllCryptoCurrencies();
-        System.out.println("WRITING TO TEXT START");
         List<CryptoCurrency> listOfCryptoCurrencies = cryptoCurrencyService.getAllCryptoCurrencies();
-        if(listOfCryptoCurrencies.size() > 0)
-            cryptoCurrencyToFileConverter.listOfCryptoCurrenciesToTextFile(listOfCryptoCurrencies);
-        System.out.println("WRITING TO TEXT END");
-
+        cryptoCurrencyToFileConverter.listOfCryptoCurrenciesToTextFile(listOfCryptoCurrencies, new File("cryptoCurrencies.txt"));
     }
 }

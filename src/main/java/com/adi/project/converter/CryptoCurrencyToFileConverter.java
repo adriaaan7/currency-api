@@ -13,23 +13,42 @@ import java.util.List;
 public class CryptoCurrencyToFileConverter implements ICryptoCurrencyToFileConverter {
 
     @Override
-    public boolean listOfCryptoCurrenciesToTextFile(List<CryptoCurrency> cryptoCurrencies) {
+    public boolean listOfCryptoCurrenciesToTextFile(List<CryptoCurrency> cryptoCurrencies, File file) {
+        if (file.length() == 100)
+            return writeCryptoCurrenciesToTxtFile(cryptoCurrencies, file, true);
+        else
+            return writeCryptoCurrenciesToTxtFile(cryptoCurrencies, file, false);
+    }
+
+    /*
+        Writing each CryptoCurrency's symbol and rateOfChange values to a txt.file
+    */
+    private boolean writeCryptoCurrenciesToTxtFile(List<CryptoCurrency> cryptoCurrencies, File file, boolean override) {
         try {
-            FileWriter fileWriter = new FileWriter("cryptoCurrencies.txt");
+            if(file.createNewFile())
+                System.out.println("Creating new file...");
+            else
+                System.out.println("File already exists");
+            if(override)
+                System.out.println("Overriding a file...");
+            else
+                System.out.println("Writing to a file...");
+            FileWriter fileWriter = new FileWriter(file);
             for(CryptoCurrency cryptoCurrency: cryptoCurrencies){
                 String symbol = cryptoCurrency.getSymbol();
                 BigDecimal rateOfChange = cryptoCurrency.getRateOfChange();
-                if(symbol.length() != 0)
-                    fileWriter.write(symbol);
+                fileWriter.write(symbol);
                 fileWriter.write(" ");
-                if(rateOfChange != null)
+                if(cryptoCurrency.getId() == 100)
+                    fileWriter.write(String.valueOf(rateOfChange));
+                else
                     fileWriter.write(String.valueOf(rateOfChange) + System.lineSeparator());
             }
+            System.out.println("Finished writing to a file");
+            fileWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        File file = new File("cryptoCurrencies.txt");
-
         return file.length() == cryptoCurrencies.size();
     }
 }
