@@ -1,6 +1,5 @@
 package com.adi.project.service;
 
-import com.adi.project.configuration.BeanConfiguration;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
@@ -8,21 +7,21 @@ import com.google.gson.JsonObject;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.Objects;
 
 @Service
 public class CryptoCurrencyApiService implements ICryptoCurrencyApiService {
 
     // ONLY PUBLIC FOR NOW
     // WILL BE EXPORTED AS ENV VAR
-    private final String apiKey = "e92b7d3f-c194-4cbb-bb25-708710e1a14a";
+    private final String coinCapApiKey = "e92b7d3f-c194-4cbb-bb25-708710e1a14a";
     //@Value("${coinCapApiKey}")
     //private String apiKey;
 
-    private final String cryptoCurrenciesURL = "https://api.coincap.io/v2/assets";
+    private final String coinCapURL = "https://api.coincap.io/v2/assets";
 
     /*
         Returns content of data field of the response from the provided url
@@ -33,13 +32,13 @@ public class CryptoCurrencyApiService implements ICryptoCurrencyApiService {
         OkHttpClient okHttpClient = new OkHttpClient();
         JsonArray cryptoCurrencies = new JsonArray();
         Request request = new Request.Builder()
-                .url(cryptoCurrenciesURL)
+                .url(coinCapURL)
                 .header("Accept-Encoding", "deflate")
-                .header("Authorization", apiKey)
+                .header("Authorization", coinCapApiKey)
                 .build();
         try {
             Response response = okHttpClient.newCall(request).execute();
-            String responseContent = response.body().string();
+            String responseContent = Objects.requireNonNull(response.body()).string();
 
             Gson gson = new GsonBuilder().create();
             JsonObject responseJson = gson.fromJson(responseContent, JsonObject.class);
@@ -55,7 +54,7 @@ public class CryptoCurrencyApiService implements ICryptoCurrencyApiService {
         return cryptoCurrencies;
     }
 
-    public String getCryptoCurrenciesURL() {
-        return cryptoCurrenciesURL;
+    public String getCoinCapURL() {
+        return coinCapURL;
     }
 }
