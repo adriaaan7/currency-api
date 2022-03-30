@@ -27,7 +27,6 @@ public class CryptoCurrencyApiService implements ICryptoCurrencyApiService {
     @Override
     public JsonArray fetchAllCryptoCurrenciesFromCoinCap( ) {
         JsonArray cryptoCurrencies;
-
         cryptoCurrencies = apiRequestBeanConfiguration.responseFromCoinCapApi().getAsJsonArray("data");
         return cryptoCurrencies;
     }
