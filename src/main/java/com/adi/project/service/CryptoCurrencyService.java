@@ -6,6 +6,7 @@ import com.adi.project.repository.CryptoCurrencyRepository;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -65,5 +66,22 @@ public class CryptoCurrencyService implements ICryptoCurrencyService {
         }
         return list;
         //return (count == list.size()) ? list : null;
+    }
+
+    @Override
+    public List<CryptoCurrency> filterCryptoCurrenciesByRateOfChange(int filter) {
+        List<CryptoCurrency> list = getAllCryptoCurrencies();
+        List<CryptoCurrency> newList = new ArrayList<>();
+        if(filter == 1) {
+            list.stream()
+                .filter(c -> c.getRateOfChange().doubleValue() > 0)
+                .forEach(newList::add);}
+
+        else if (filter == -1){
+            list.stream()
+                .filter(c -> c.getRateOfChange().doubleValue() < 0)
+                .forEach(newList::add);
+        }
+        return newList;
     }
 }

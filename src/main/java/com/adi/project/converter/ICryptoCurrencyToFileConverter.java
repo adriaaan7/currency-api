@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface ICryptoCurrencyToFileConverter {
     boolean listOfCryptoCurrenciesToTextFile(List<CryptoCurrency> cryptoCurrencies, File file);
+    long countNumberOfLinesInTextFile(File file);
+    String convertDotToCommaInString(String value);
 }
