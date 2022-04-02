@@ -13,7 +13,7 @@ import java.util.List;
 public class JsonParser implements IJsonParser {
 
     @Override
-    public List<CryptoCurrency> parseJsonElementToCryptoCurrency(JsonArray jsonArray) {
+    public List<CryptoCurrency> parseJsonArrayToCryptoCurrencyFromCoinCap(JsonArray jsonArray) {
         List<CryptoCurrency> cryptoCurrencyList = new ArrayList<>();
         for (int i = 0; i < jsonArray.size(); i++){
             CryptoCurrency cryptoCurrency = new CryptoCurrency();
@@ -27,4 +27,21 @@ public class JsonParser implements IJsonParser {
         }
         return cryptoCurrencyList;
     }
+
+    public List<CryptoCurrency> parseJsonArrayToCryptoCurrencyFromCoinMarketCap(JsonArray jsonArray){
+        List<CryptoCurrency> cryptoCurrencyList = new ArrayList<>();
+        for (int i = 0; i < jsonArray.size(); i++){
+            CryptoCurrency cryptoCurrency = new CryptoCurrency();
+            JsonObject obj = jsonArray.get(i).getAsJsonObject();
+            cryptoCurrency.setName(obj.get("name").getAsString());
+            cryptoCurrency.setRank(++i);
+            cryptoCurrency.setSymbol(obj.get("symbol").getAsString());
+            cryptoCurrency.setPriceUsd(obj.getAsJsonObject("quote").getAsJsonObject("USD").get("price").getAsBigDecimal());
+            cryptoCurrency.setRateOfChange(obj.getAsJsonObject("quote").getAsJsonObject("USD").get("percent_change_24h").getAsBigDecimal());
+            cryptoCurrencyList.add(cryptoCurrency);
+            System.out.println(obj);
+        }
+        return cryptoCurrencyList;
+    }
+
 }

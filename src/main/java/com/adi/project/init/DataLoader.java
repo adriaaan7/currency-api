@@ -28,8 +28,8 @@ public class DataLoader implements ApplicationRunner {
         List<CryptoCurrency> negativeRatesOfChange = cryptoCurrencyService.filterCryptoCurrenciesByRateOfChange(-1);
         List<CryptoCurrency> positiveRatesOfChange = cryptoCurrencyService.filterCryptoCurrenciesByRateOfChange(1);
 
-        cryptoCurrencyToFileConverter.listOfCryptoCurrenciesToTextFile(listOfCryptoCurrencies, new File("cryptoCurrencies.txt"));
-        cryptoCurrencyToFileConverter.writeCryptoCurrenciesIDAndRateOfChangeToTxtFile(negativeRatesOfChange, new File("cryptoCurrenciesNegativeRatesOfChange.txt"));
-        cryptoCurrencyToFileConverter.writeCryptoCurrenciesIDAndRateOfChangeToTxtFile(positiveRatesOfChange, new File("cryptoCurrenciesPositiveRatesOfChange.txt"));
+        //cryptoCurrencyToFileConverter.listOfCryptoCurrenciesToTextFile(listOfCryptoCurrencies, new File("cryptoCurrencies.txt"));
+        //cryptoCurrencyToFileConverter.writeCryptoCurrenciesIDAndRateOfChangeToTxtFile(negativeRatesOfChange, new File("cryptoCurrenciesNegativeRatesOfChange.txt"));
+        //cryptoCurrencyToFileConverter.writeCryptoCurrenciesIDAndRateOfChangeToTxtFile(positiveRatesOfChange, new File("cryptoCurrenciesPositiveRatesOfChange.txt"));
     }
 }

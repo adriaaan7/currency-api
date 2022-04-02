@@ -40,9 +40,14 @@ public class CryptoCurrencyService implements ICryptoCurrencyService {
 
     @Override
     public List<CryptoCurrency> initAllCryptoCurrencies() {
-        return cryptoCurrencyRepository.saveAll(
-                jsonParser.parseJsonElementToCryptoCurrency(
-                cryptoCurrencyApiService.fetchAllCryptoCurrenciesFromCoinCap()));
+        List<CryptoCurrency> coinCapList = jsonParser.parseJsonArrayToCryptoCurrencyFromCoinCap(
+                cryptoCurrencyApiService.fetchAllCryptoCurrenciesFromCoinCap());
+        List<CryptoCurrency> coinMarketCapList = jsonParser.parseJsonArrayToCryptoCurrencyFromCoinMarketCap(
+                cryptoCurrencyApiService.fetchAllCryptoCurrenciesFromCoinMarketCap());
+        //jsonParser.parseJsonArrayToCryptoCurrencyFromCoinMarketCap(cryptoCurrencyApiService.fetchAllCryptoCurrenciesFromCoinMarketCap());
+        cryptoCurrencyRepository.saveAll(coinCapList);
+        cryptoCurrencyRepository.saveAll(coinMarketCapList);
+        return cryptoCurrencyRepository.getAllCryptoCurrencies();
     }
 
     @Override
@@ -54,7 +59,7 @@ public class CryptoCurrencyService implements ICryptoCurrencyService {
 
     @Override
     public List<CryptoCurrency> updateAllCryptoCurrencies() {
-        List<CryptoCurrency> list = jsonParser.parseJsonElementToCryptoCurrency(
+        List<CryptoCurrency> list = jsonParser.parseJsonArrayToCryptoCurrencyFromCoinCap(
                 cryptoCurrencyApiService.fetchAllCryptoCurrenciesFromCoinCap());
         // checking if whole list was updated
         int count = 0;
