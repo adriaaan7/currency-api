@@ -7,4 +7,5 @@ import java.util.Map;
 public interface ICryptoCurrencyApiService {
     JsonArray fetchAllCryptoCurrenciesFromCoinCap();
     JsonArray fetchAllCryptoCurrenciesFromCoinMarketCap();
+    JsonArray fetchAllCryptoCurrenciesFromGemini();
 }

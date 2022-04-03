@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -25,6 +26,7 @@ public class ApiRequestService implements IApiRequestService {
 
     @Value("${coinCapApiKey:0}")
     private String coinCapApiKey; // = "e92b7d3f-c194-4cbb-bb25-708710e1a14a";
+    private final String geminiURL = "https://api.gemini.com/v1/pricefeed";
     private final String coinCapURL = "https://api.coincap.io/v2/assets";
     private final String coinMarketCapURL =
             "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest";
@@ -38,10 +40,32 @@ public class ApiRequestService implements IApiRequestService {
         this.apiHostingService = apiHostingService;
     }
 
+    @Override
+    public JsonObject responseFromGeminiApi() {
+        JsonObject responseJson = new JsonObject();
+        OkHttpClient okHttpClient = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(geminiURL)
+                .build();
+        try {
+            Response response = okHttpClient.newCall(request).execute();
+            String responseContent = Objects.requireNonNull(response.body()).string();
+            Gson gson = new GsonBuilder().create();
+            // @TODO
+            // \@return responseJson is not a json object now
+            //responseJson = gson.fromJson(responseContent, JsonObject.class);
+            return responseJson;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("XD");
+        return responseJson;
+    }
+
     /*
-        Send get request to CoinCap api and
-        \@return response as JsonObject containing crypto currency data
-    */
+            Send get request to CoinCap api and
+            \@return response as JsonObject containing crypto currency data
+        */
     @Override
     public JsonObject responseFromCoinCapApi() {
         JsonObject responseJson = new JsonObject();

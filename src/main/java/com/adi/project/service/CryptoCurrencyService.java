@@ -43,13 +43,14 @@ public class CryptoCurrencyService implements ICryptoCurrencyService {
 
     @Override
     public List<CryptoCurrency> initAllCryptoCurrencies() {
-        List<CryptoCurrency> coinCapList = jsonParser.parseJsonArrayToCryptoCurrencyFromCoinCap(
+        /*List<CryptoCurrency> coinCapList = jsonParser.parseJsonArrayToCryptoCurrencyFromCoinCap(
                 cryptoCurrencyApiService.fetchAllCryptoCurrenciesFromCoinCap());
         List<CryptoCurrency> coinMarketCapList = jsonParser.parseJsonArrayToCryptoCurrencyFromCoinMarketCap(
                 cryptoCurrencyApiService.fetchAllCryptoCurrenciesFromCoinMarketCap());
         //jsonParser.parseJsonArrayToCryptoCurrencyFromCoinMarketCap(cryptoCurrencyApiService.fetchAllCryptoCurrenciesFromCoinMarketCap());
         cryptoCurrencyRepository.saveAll(coinCapList);
-        cryptoCurrencyRepository.saveAll(coinMarketCapList);
+        cryptoCurrencyRepository.saveAll(coinMarketCapList);*/
+        cryptoCurrencyApiService.fetchAllCryptoCurrenciesFromGemini();
         return cryptoCurrencyRepository.getAllCryptoCurrencies();
     }
 

@@ -28,4 +28,11 @@ public class CryptoCurrencyApiService implements ICryptoCurrencyApiService {
         return cryptoCurrencies;
     }
 
+    @Override
+    public JsonArray fetchAllCryptoCurrenciesFromGemini() {
+        JsonArray cryptoCurrencies;
+        apiRequestService.responseFromGeminiApi();
+        return null;
+    }
+
 }

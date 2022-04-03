@@ -9,5 +9,6 @@ public interface IApiRequestService {
 
     JsonObject responseFromCoinCapApi();
     JsonObject responseFromCoinMarketCapApi();
+    JsonObject responseFromGeminiApi();
     List<ApiHosting> saveAllApiHostings(List<ApiHosting> list);
 }
