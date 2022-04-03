@@ -5,12 +5,16 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "crypto_currencies")
+@Table(name = "crypto_currencies", schema = "public")
 public class CryptoCurrency {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "api_hosting_id")
+    private ApiHosting hosting;
 
     private String name;
     private int rank;
@@ -32,6 +36,16 @@ public class CryptoCurrency {
     }
 
     public CryptoCurrency(String name, int rank, String symbol, BigDecimal priceUsd, BigDecimal rateOfChange) {
+        this.name = name;
+        this.rank = rank;
+        this.symbol = symbol;
+        this.priceUsd = priceUsd;
+        this.rateOfChange = rateOfChange;
+    }
+
+    public CryptoCurrency(Long id, ApiHosting hosting, String name, int rank, String symbol, BigDecimal priceUsd, BigDecimal rateOfChange) {
+        this.id = id;
+        this.hosting = hosting;
         this.name = name;
         this.rank = rank;
         this.symbol = symbol;
@@ -93,6 +107,14 @@ public class CryptoCurrency {
 
     public void setRateOfChange(BigDecimal rateOfChange) {
         this.rateOfChange = rateOfChange;
+    }
+
+    public ApiHosting getHosting() {
+        return hosting;
+    }
+
+    public void setHosting(ApiHosting apiHosting) {
+        this.hosting = apiHosting;
     }
 }
 

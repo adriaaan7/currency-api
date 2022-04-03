@@ -1,6 +1,7 @@
 package com.adi.project.service;
 
 import com.adi.project.converter.JsonParser;
+import com.adi.project.model.ApiHosting;
 import com.adi.project.model.CryptoCurrency;
 import com.adi.project.repository.CryptoCurrencyRepository;
 import org.springframework.stereotype.Service;
@@ -15,11 +16,13 @@ public class CryptoCurrencyService implements ICryptoCurrencyService {
     private final CryptoCurrencyRepository cryptoCurrencyRepository;
     private final JsonParser jsonParser;
     private final CryptoCurrencyApiService cryptoCurrencyApiService;
+    private final IApiHostingService apiHostingService;
 
-    public CryptoCurrencyService(CryptoCurrencyRepository cryptoCurrencyRepository, JsonParser jsonParser, CryptoCurrencyApiService cryptoCurrencyApiService) {
+    public CryptoCurrencyService(CryptoCurrencyRepository cryptoCurrencyRepository, JsonParser jsonParser, CryptoCurrencyApiService cryptoCurrencyApiService, IApiHostingService apiHostingService) {
         this.cryptoCurrencyRepository = cryptoCurrencyRepository;
         this.jsonParser = jsonParser;
         this.cryptoCurrencyApiService = cryptoCurrencyApiService;
+        this.apiHostingService = apiHostingService;
     }
 
     @Override
