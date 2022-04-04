@@ -9,6 +9,7 @@ import com.google.gson.JsonParser;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import okhttp3.ResponseBody;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -25,14 +26,14 @@ import java.util.Objects;
 public class ApiRequestService implements IApiRequestService {
 
     @Value("${coinCapApiKey:0}")
-    private String coinCapApiKey; // = "e92b7d3f-c194-4cbb-bb25-708710e1a14a";
+    private String coinCapApiKey; //= "e92b7d3f-c194-4cbb-bb25-708710e1a14a";
     private final String geminiURL = "https://api.gemini.com/v1/pricefeed";
     private final String coinCapURL = "https://api.coincap.io/v2/assets";
     private final String coinMarketCapURL =
             "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest";
 
-    //@Value("${coinMarketCapApiKey}")
-    private String coinMarketCapApiKey = "e41224c3-0abc-4369-83ae-0ecd1092be37";
+    @Value("${coinMarketCapApiKey:0}")
+    private String coinMarketCapApiKey; // = "e41224c3-0abc-4369-83ae-0ecd1092be37";
 
     private final ApiHostingService apiHostingService;
 
@@ -53,7 +54,7 @@ public class ApiRequestService implements IApiRequestService {
             Gson gson = new GsonBuilder().create();
             // @TODO
             // \@return responseJson is not a json object now
-            //responseJson = gson.fromJson(responseContent, JsonObject.class);
+            ResponseBody body = response.body();
             return responseJson;
         } catch (IOException e) {
             e.printStackTrace();
