@@ -1,24 +1,18 @@
 package com.adi.project.service;
 
 import com.adi.project.model.ApiHosting;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.List;
 import java.util.Objects;
 
@@ -27,13 +21,14 @@ public class ApiRequestService implements IApiRequestService {
 
     @Value("${coinCapApiKey:0}")
     private String coinCapApiKey; //= "e92b7d3f-c194-4cbb-bb25-708710e1a14a";
+    @Value("${coinMarketCapApiKey:0}")
+    private String coinMarketCapApiKey; // = "e41224c3-0abc-4369-83ae-0ecd1092be37";
+
     private final String geminiURL = "https://api.gemini.com/v1/pricefeed";
     private final String coinCapURL = "https://api.coincap.io/v2/assets";
     private final String coinMarketCapURL =
             "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest";
 
-    @Value("${coinMarketCapApiKey:0}")
-    private String coinMarketCapApiKey; // = "e41224c3-0abc-4369-83ae-0ecd1092be37";
 
     private final ApiHostingService apiHostingService;
 
@@ -54,12 +49,13 @@ public class ApiRequestService implements IApiRequestService {
             Gson gson = new GsonBuilder().create();
             // @TODO
             // \@return responseJson is not a json object now
-            ResponseBody body = response.body();
+            JsonArray responseArray = gson.fromJson(responseContent, JsonArray.class);
+            
+            System.out.println(responseJson);
             return responseJson;
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("XD");
         return responseJson;
     }
 
@@ -81,6 +77,7 @@ public class ApiRequestService implements IApiRequestService {
             String responseContent = Objects.requireNonNull(response.body()).string();
             Gson gson = new GsonBuilder().create();
             responseJson = gson.fromJson(responseContent, JsonObject.class);
+            System.out.println(responseJson);
             return responseJson;
         } catch (IOException e) {
             e.printStackTrace();

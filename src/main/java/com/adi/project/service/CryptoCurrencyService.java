@@ -50,6 +50,7 @@ public class CryptoCurrencyService implements ICryptoCurrencyService {
         //jsonParser.parseJsonArrayToCryptoCurrencyFromCoinMarketCap(cryptoCurrencyApiService.fetchAllCryptoCurrenciesFromCoinMarketCap());
         cryptoCurrencyRepository.saveAll(coinCapList);
         cryptoCurrencyRepository.saveAll(coinMarketCapList);*/
+        cryptoCurrencyApiService.fetchAllCryptoCurrenciesFromCoinCap();
         cryptoCurrencyApiService.fetchAllCryptoCurrenciesFromGemini();
         return cryptoCurrencyRepository.getAllCryptoCurrencies();
     }
