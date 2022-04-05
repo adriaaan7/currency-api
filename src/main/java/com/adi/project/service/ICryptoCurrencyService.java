@@ -2,6 +2,7 @@ package com.adi.project.service;
 
 import com.adi.project.model.CryptoCurrency;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -21,6 +22,8 @@ public interface ICryptoCurrencyService {
                               BigDecimal priceUsd, BigDecimal rateOfChange);
 
     List<CryptoCurrency> updateAllCryptoCurrencies();
+
+    List<JsonObject> getAllCryptoCurrenciesWithUsdPrices(JsonArray jsonArray);
 
     /*
         Method which returns list of cryptoCurrencies with positive or negative rate of change

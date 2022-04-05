@@ -4,6 +4,8 @@ import com.adi.project.converter.JsonParser;
 import com.adi.project.model.ApiHosting;
 import com.adi.project.model.CryptoCurrency;
 import com.adi.project.repository.CryptoCurrencyRepository;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -43,15 +45,18 @@ public class CryptoCurrencyService implements ICryptoCurrencyService {
 
     @Override
     public List<CryptoCurrency> initAllCryptoCurrencies() {
-        /*List<CryptoCurrency> coinCapList = jsonParser.parseJsonArrayToCryptoCurrencyFromCoinCap(
+        List<CryptoCurrency> coinCapList = jsonParser.parseJsonArrayToCryptoCurrencyFromCoinCap(
                 cryptoCurrencyApiService.fetchAllCryptoCurrenciesFromCoinCap());
         List<CryptoCurrency> coinMarketCapList = jsonParser.parseJsonArrayToCryptoCurrencyFromCoinMarketCap(
                 cryptoCurrencyApiService.fetchAllCryptoCurrenciesFromCoinMarketCap());
-        //jsonParser.parseJsonArrayToCryptoCurrencyFromCoinMarketCap(cryptoCurrencyApiService.fetchAllCryptoCurrenciesFromCoinMarketCap());
+        List<CryptoCurrency> geminiList;
+        List<JsonObject> allCryptoCurrenciesWithUsdPrices = getAllCryptoCurrenciesWithUsdPrices(cryptoCurrencyApiService.fetchAllCryptoCurrenciesFromGemini());
+        geminiList = jsonParser.parseJsonObjectListToCryptoCurrencyList(allCryptoCurrenciesWithUsdPrices, "Gemini");
         cryptoCurrencyRepository.saveAll(coinCapList);
-        cryptoCurrencyRepository.saveAll(coinMarketCapList);*/
-        cryptoCurrencyApiService.fetchAllCryptoCurrenciesFromCoinCap();
-        cryptoCurrencyApiService.fetchAllCryptoCurrenciesFromGemini();
+        cryptoCurrencyRepository.saveAll(coinMarketCapList);
+        cryptoCurrencyRepository.saveAll(geminiList);
+        //cryptoCurrencyApiService.fetchAllCryptoCurrenciesFromCoinCap();
+        //cryptoCurrencyApiService.fetchAllCryptoCurrenciesFromGemini();
         return cryptoCurrencyRepository.getAllCryptoCurrencies();
     }
 
@@ -93,5 +98,21 @@ public class CryptoCurrencyService implements ICryptoCurrencyService {
                 .forEach(newList::add);
         }
         return newList;
+    }
+
+    /*
+        Method which retrieves all the crypto currencies with usd prices
+        from Gemini API and
+        \@return list of JsonObjects containing USD prices
+     */
+    @Override
+    public List<JsonObject> getAllCryptoCurrenciesWithUsdPrices(JsonArray jsonArray) {
+        List<JsonObject> list = new ArrayList<>();
+        for(int i = 0; i < jsonArray.size(); i++){
+            JsonObject obj = jsonArray.get(i).getAsJsonObject();
+            if(obj.get("pair").getAsString().toLowerCase().contains("usd"))
+                list.add(obj);
+        }
+        return list;
     }
 }

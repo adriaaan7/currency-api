@@ -16,23 +16,17 @@ public class CryptoCurrencyApiService implements ICryptoCurrencyApiService {
 
     @Override
     public JsonArray fetchAllCryptoCurrenciesFromCoinCap( ) {
-        JsonArray cryptoCurrencies;
-        cryptoCurrencies = apiRequestService.responseFromCoinCapApi().getAsJsonArray("data");
-        return cryptoCurrencies;
+        return apiRequestService.responseFromCoinCapApi();
     }
 
     @Override
     public JsonArray fetchAllCryptoCurrenciesFromCoinMarketCap() {
-        JsonArray cryptoCurrencies;
-        cryptoCurrencies = apiRequestService.responseFromCoinMarketCapApi().getAsJsonArray("data");
-        return cryptoCurrencies;
+        return apiRequestService.responseFromCoinMarketCapApi();
     }
 
     @Override
     public JsonArray fetchAllCryptoCurrenciesFromGemini() {
-        JsonArray cryptoCurrencies;
-        apiRequestService.responseFromGeminiApi();
-        return null;
+        return apiRequestService.responseFromGeminiApi();
     }
 
 }

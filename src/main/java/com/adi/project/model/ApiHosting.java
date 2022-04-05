@@ -19,6 +19,14 @@ public class ApiHosting {
 
     private String name;
 
+    public ApiHosting(){
+
+    }
+
+    public ApiHosting(String name) {
+        this.name = name;
+    }
+
     public void add(CryptoCurrency cryptoCurrency){
         if (cryptoCurrencyList == null)
             cryptoCurrencyList = new ArrayList<>();

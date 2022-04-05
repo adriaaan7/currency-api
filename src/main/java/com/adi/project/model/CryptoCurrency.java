@@ -53,6 +53,20 @@ public class CryptoCurrency {
         this.rateOfChange = rateOfChange;
     }
 
+    @Override
+    public String toString() {
+        return "CryptoCurrency{" +
+                "id=" + id +
+                ", hosting=" + hosting +
+                ", name='" + name + '\'' +
+                ", rank=" + rank +
+                ", symbol='" + symbol + '\'' +
+                ", priceUsd=" + priceUsd +
+                ", date=" + date +
+                ", rateOfChange=" + rateOfChange +
+                '}';
+    }
+
     public Long getId() {
         return id;
     }

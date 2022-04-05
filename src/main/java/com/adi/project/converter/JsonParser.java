@@ -32,6 +32,24 @@ public class JsonParser implements IJsonParser {
         return cryptoCurrencyList;
     }
 
+    @Override
+    public List<CryptoCurrency> parseJsonArrayToCryptoCurrencyFromGemini(JsonArray jsonArray) {
+        List<CryptoCurrency> cryptoCurrencyList = new ArrayList<>();
+        ApiHosting geminiHosting = new ApiHosting();
+        geminiHosting.setName("Gemini");
+        for (int i = 0; i < jsonArray.size(); i++)
+        {
+            CryptoCurrency cryptoCurrency = new CryptoCurrency();
+            JsonObject obj = jsonArray.get(i).getAsJsonObject();
+            cryptoCurrency.setSymbol(obj.get("pair").getAsString());
+            cryptoCurrency.setPriceUsd(obj.get("price").getAsBigDecimal());
+            cryptoCurrency.setRateOfChange(obj.get("percentChange24h").getAsBigDecimal());
+            cryptoCurrency.setHosting(geminiHosting);
+            cryptoCurrencyList.add(cryptoCurrency);
+        }
+        return cryptoCurrencyList;
+    }
+
     public List<CryptoCurrency> parseJsonArrayToCryptoCurrencyFromCoinMarketCap(JsonArray jsonArray){
         List<CryptoCurrency> cryptoCurrencyList = new ArrayList<>();
         ApiHosting coinMarketCapHosting = new ApiHosting();
@@ -46,9 +64,25 @@ public class JsonParser implements IJsonParser {
             cryptoCurrency.setRateOfChange(obj.getAsJsonObject("quote").getAsJsonObject("USD").get("percent_change_24h").getAsBigDecimal());
             cryptoCurrency.setHosting(coinMarketCapHosting);
             cryptoCurrencyList.add(cryptoCurrency);
-            System.out.println(obj);
         }
         return cryptoCurrencyList;
     }
 
+    @Override
+    public List<CryptoCurrency> parseJsonObjectListToCryptoCurrencyList(List<JsonObject> list, String hostingName) {
+        List<CryptoCurrency> cryptoCurrencyList = new ArrayList<>();
+        ApiHosting hosting = new ApiHosting(hostingName);
+        for(int i = 0; i < list.size(); i++){
+            CryptoCurrency cryptoCurrency = new CryptoCurrency();
+            JsonObject obj = list.get(i);
+            cryptoCurrency.setName(obj.get("pair").getAsString());
+            cryptoCurrency.setSymbol(obj.get("pair").getAsString());
+            cryptoCurrency.setPriceUsd(obj.get("price").getAsBigDecimal());
+            cryptoCurrency.setRateOfChange(obj.get("percentChange24h").getAsBigDecimal());
+            cryptoCurrency.setHosting(hosting);
+            cryptoCurrencyList.add(cryptoCurrency);
+            System.out.println(cryptoCurrency);
+        }
+        return cryptoCurrencyList;
+    }
 }

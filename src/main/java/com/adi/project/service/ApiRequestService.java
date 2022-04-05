@@ -37,8 +37,8 @@ public class ApiRequestService implements IApiRequestService {
     }
 
     @Override
-    public JsonObject responseFromGeminiApi() {
-        JsonObject responseJson = new JsonObject();
+    public JsonArray responseFromGeminiApi() {
+        JsonArray responseArray = new JsonArray();
         OkHttpClient okHttpClient = new OkHttpClient();
         Request request = new Request.Builder()
                 .url(geminiURL)
@@ -49,14 +49,12 @@ public class ApiRequestService implements IApiRequestService {
             Gson gson = new GsonBuilder().create();
             // @TODO
             // \@return responseJson is not a json object now
-            JsonArray responseArray = gson.fromJson(responseContent, JsonArray.class);
-            
-            System.out.println(responseJson);
-            return responseJson;
+            responseArray = gson.fromJson(responseContent, JsonArray.class);
+            return responseArray;
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return responseJson;
+        return responseArray;
     }
 
     /*
@@ -64,8 +62,8 @@ public class ApiRequestService implements IApiRequestService {
             \@return response as JsonObject containing crypto currency data
         */
     @Override
-    public JsonObject responseFromCoinCapApi() {
-        JsonObject responseJson = new JsonObject();
+    public JsonArray responseFromCoinCapApi() {
+        JsonArray array = new JsonArray();
         OkHttpClient okHttpClient = new OkHttpClient();
         Request request = new Request.Builder()
                 .url(coinCapURL)
@@ -76,13 +74,13 @@ public class ApiRequestService implements IApiRequestService {
             Response response = okHttpClient.newCall(request).execute();
             String responseContent = Objects.requireNonNull(response.body()).string();
             Gson gson = new GsonBuilder().create();
-            responseJson = gson.fromJson(responseContent, JsonObject.class);
-            System.out.println(responseJson);
-            return responseJson;
+            array =  gson.fromJson(responseContent, JsonObject.class)
+                         .getAsJsonArray("data");
+            return array;
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return responseJson;
+        return array;
     }
 
 
@@ -91,8 +89,8 @@ public class ApiRequestService implements IApiRequestService {
         \@return response as JsonObject containing crypto currency data
     */
     @Override
-    public JsonObject responseFromCoinMarketCapApi() {
-        JsonObject responseJson = new JsonObject();
+    public JsonArray responseFromCoinMarketCapApi() {
+        JsonArray array = new JsonArray();
         OkHttpClient okHttpClient = new OkHttpClient();
 
         Request request = new Request.Builder()
@@ -103,12 +101,13 @@ public class ApiRequestService implements IApiRequestService {
             Response response = okHttpClient.newCall(request).execute();
             String responseContent = Objects.requireNonNull(response.body()).string();
             Gson gson = new GsonBuilder().create();
-            responseJson = gson.fromJson(responseContent, JsonObject.class);
-            return responseJson;
+            array = gson.fromJson(responseContent, JsonObject.class)
+                        .getAsJsonArray("data");
+            return array;
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return responseJson;
+        return array;
     }
 
     @Override

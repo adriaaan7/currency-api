@@ -28,9 +28,9 @@ public class DataLoader implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         cryptoCurrencyService.initAllCryptoCurrencies();
-        List<CryptoCurrency> listOfCryptoCurrencies = cryptoCurrencyService.getAllCryptoCurrencies();
-        List<CryptoCurrency> negativeRatesOfChange = cryptoCurrencyService.filterCryptoCurrenciesByRateOfChange(-1);
-        List<CryptoCurrency> positiveRatesOfChange = cryptoCurrencyService.filterCryptoCurrenciesByRateOfChange(1);
+        //List<CryptoCurrency> listOfCryptoCurrencies = cryptoCurrencyService.getAllCryptoCurrencies();
+        //List<CryptoCurrency> negativeRatesOfChange = cryptoCurrencyService.filterCryptoCurrenciesByRateOfChange(-1);
+        //List<CryptoCurrency> positiveRatesOfChange = cryptoCurrencyService.filterCryptoCurrenciesByRateOfChange(1);
 
         //cryptoCurrencyToFileConverter.listOfCryptoCurrenciesToTextFile(listOfCryptoCurrencies, new File("cryptoCurrencies.txt"));
         //cryptoCurrencyToFileConverter.writeCryptoCurrenciesIDAndRateOfChangeToTxtFile(negativeRatesOfChange, new File("cryptoCurrenciesNegativeRatesOfChange.txt"));
