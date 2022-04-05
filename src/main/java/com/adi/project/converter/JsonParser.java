@@ -2,6 +2,7 @@ package com.adi.project.converter;
 
 import com.adi.project.model.ApiHosting;
 import com.adi.project.model.CryptoCurrency;
+import com.adi.project.service.ICryptoCurrencyService;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import org.springframework.stereotype.Service;
@@ -75,13 +76,13 @@ public class JsonParser implements IJsonParser {
         for(int i = 0; i < list.size(); i++){
             CryptoCurrency cryptoCurrency = new CryptoCurrency();
             JsonObject obj = list.get(i);
-            cryptoCurrency.setName(obj.get("pair").getAsString());
-            cryptoCurrency.setSymbol(obj.get("pair").getAsString());
+            String name = obj.get("pair").getAsString().replaceAll("USD", "");
+            cryptoCurrency.setName(name);
+            cryptoCurrency.setSymbol(name);
             cryptoCurrency.setPriceUsd(obj.get("price").getAsBigDecimal());
             cryptoCurrency.setRateOfChange(obj.get("percentChange24h").getAsBigDecimal());
             cryptoCurrency.setHosting(hosting);
             cryptoCurrencyList.add(cryptoCurrency);
-            System.out.println(cryptoCurrency);
         }
         return cryptoCurrencyList;
     }

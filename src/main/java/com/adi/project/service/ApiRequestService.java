@@ -24,10 +24,12 @@ public class ApiRequestService implements IApiRequestService {
     @Value("${coinMarketCapApiKey:0}")
     private String coinMarketCapApiKey; // = "e41224c3-0abc-4369-83ae-0ecd1092be37";
 
-    private final String geminiURL = "https://api.gemini.com/v1/pricefeed";
-    private final String coinCapURL = "https://api.coincap.io/v2/assets";
-    private final String coinMarketCapURL =
-            "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest";
+    @Value("${api.url.gemini}")
+    private String geminiURL;
+    @Value("${api.url.coinCap}")
+    private String coinCapURL;
+    @Value("${api.url.coinMarketCap}")
+    private String coinMarketCapURL;
 
 
     private final ApiHostingService apiHostingService;

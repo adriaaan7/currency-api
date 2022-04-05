@@ -24,7 +24,7 @@ public interface ICryptoCurrencyService {
     List<CryptoCurrency> updateAllCryptoCurrencies();
 
     List<JsonObject> getAllCryptoCurrenciesWithUsdPrices(JsonArray jsonArray);
-
+    
     /*
         Method which returns list of cryptoCurrencies with positive or negative rate of change
         If you want to get in return cryptoCurrencies with negative rate of change, then pass -1 as filter

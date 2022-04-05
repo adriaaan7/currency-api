@@ -12,6 +12,15 @@ public class CryptoCurrency {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    public CryptoCurrency(Long id, String name, int rank, String symbol, BigDecimal priceUsd, BigDecimal rateOfChange) {
+        this.id = id;
+        this.name = name;
+        this.rank = rank;
+        this.symbol = symbol;
+        this.priceUsd = priceUsd;
+        this.rateOfChange = rateOfChange;
+    }
+
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "api_hosting_id")
     private ApiHosting hosting;

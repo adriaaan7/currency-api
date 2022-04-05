@@ -29,4 +29,6 @@ public interface CryptoCurrencyRepository extends JpaRepository<CryptoCurrency, 
     void updateCryptoCurrency(Long id, String name,
                               int rank, String symbol,
                               BigDecimal priceUsd, BigDecimal rateOfChange);
+
+    List<CryptoCurrency> findAll();
 }

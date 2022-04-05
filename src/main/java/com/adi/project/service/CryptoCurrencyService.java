@@ -18,13 +18,13 @@ public class CryptoCurrencyService implements ICryptoCurrencyService {
     private final CryptoCurrencyRepository cryptoCurrencyRepository;
     private final JsonParser jsonParser;
     private final CryptoCurrencyApiService cryptoCurrencyApiService;
-    private final IApiHostingService apiHostingService;
 
-    public CryptoCurrencyService(CryptoCurrencyRepository cryptoCurrencyRepository, JsonParser jsonParser, CryptoCurrencyApiService cryptoCurrencyApiService, IApiHostingService apiHostingService) {
+    public CryptoCurrencyService(CryptoCurrencyRepository cryptoCurrencyRepository,
+                                 JsonParser jsonParser,
+                                 CryptoCurrencyApiService cryptoCurrencyApiService) {
         this.cryptoCurrencyRepository = cryptoCurrencyRepository;
         this.jsonParser = jsonParser;
         this.cryptoCurrencyApiService = cryptoCurrencyApiService;
-        this.apiHostingService = apiHostingService;
     }
 
     @Override
@@ -45,18 +45,19 @@ public class CryptoCurrencyService implements ICryptoCurrencyService {
 
     @Override
     public List<CryptoCurrency> initAllCryptoCurrencies() {
-        List<CryptoCurrency> coinCapList = jsonParser.parseJsonArrayToCryptoCurrencyFromCoinCap(
+        List<CryptoCurrency> coinCapList = jsonParser
+                .parseJsonArrayToCryptoCurrencyFromCoinCap(
                 cryptoCurrencyApiService.fetchAllCryptoCurrenciesFromCoinCap());
-        List<CryptoCurrency> coinMarketCapList = jsonParser.parseJsonArrayToCryptoCurrencyFromCoinMarketCap(
+        List<CryptoCurrency> coinMarketCapList = jsonParser
+                .parseJsonArrayToCryptoCurrencyFromCoinMarketCap(
                 cryptoCurrencyApiService.fetchAllCryptoCurrenciesFromCoinMarketCap());
-        List<CryptoCurrency> geminiList;
-        List<JsonObject> allCryptoCurrenciesWithUsdPrices = getAllCryptoCurrenciesWithUsdPrices(cryptoCurrencyApiService.fetchAllCryptoCurrenciesFromGemini());
-        geminiList = jsonParser.parseJsonObjectListToCryptoCurrencyList(allCryptoCurrenciesWithUsdPrices, "Gemini");
+        List<JsonObject> allCryptoCurrenciesWithUsdPrices = getAllCryptoCurrenciesWithUsdPrices(
+                cryptoCurrencyApiService.fetchAllCryptoCurrenciesFromGemini());
+        List<CryptoCurrency> geminiList = jsonParser
+                .parseJsonObjectListToCryptoCurrencyList(allCryptoCurrenciesWithUsdPrices, "Gemini");
         cryptoCurrencyRepository.saveAll(coinCapList);
         cryptoCurrencyRepository.saveAll(coinMarketCapList);
         cryptoCurrencyRepository.saveAll(geminiList);
-        //cryptoCurrencyApiService.fetchAllCryptoCurrenciesFromCoinCap();
-        //cryptoCurrencyApiService.fetchAllCryptoCurrenciesFromGemini();
         return cryptoCurrencyRepository.getAllCryptoCurrencies();
     }
 
