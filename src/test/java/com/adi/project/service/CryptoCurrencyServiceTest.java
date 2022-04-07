@@ -40,15 +40,29 @@ class CryptoCurrencyServiceTest {
     private CryptoCurrencyService cryptoCurrencyService;
 
     @InjectMocks
-    private JsonParser jsonParser;
-
-    @InjectMocks
     private CryptoCurrencyApiService cryptoCurrencyApiService;
 
 
     @Test
-    void getAllCryptoCurrencies() {
+    void should_return_crypto_currency_list_with_one_element() {
        // given
+        List<CryptoCurrency> list = new ArrayList<>();
+        CryptoCurrency c1 = new CryptoCurrency();
+        c1.setName("Polish Coin");
+        list.add(c1);
+
+        // when
+        when(cryptoCurrencyRepository.findAll()).thenReturn(list);
+        List<CryptoCurrency> all = cryptoCurrencyService.getAllCryptoCurrencies();
+        List<CryptoCurrency> newList = new ArrayList<>(all);
+
+        // then
+        assertEquals(1, newList.size());
+    }
+
+    @Test
+    void should_return_crypto_currency_list_with_given_crypto_currency() {
+        // given
         List<CryptoCurrency> list = new ArrayList<>();
         CryptoCurrency c1 = new CryptoCurrency();
         c1.setName("Polish Coin");
@@ -61,12 +75,11 @@ class CryptoCurrencyServiceTest {
         List<CryptoCurrency> newList = new ArrayList<>(all);
 
         // then
-        assertEquals(1, newList.size());
-
+        assertEquals("Polish Coin", newList.get(0).getName());
     }
 
     @Test
-    void getCryptoCurrencyByName() {
+    void should_return_crypto_currency_with_the_same_name() {
         // given
         CryptoCurrency cryptoCurrency = new CryptoCurrency();
         cryptoCurrency.setName("Polish Coin");
@@ -83,7 +96,7 @@ class CryptoCurrencyServiceTest {
     }
 
     @Test
-    void saveCryptoCurrency() {
+    void should_Return_CryptoCurrency_When_Saving_With_Same_Price() {
         // given
         CryptoCurrency currency1 = new CryptoCurrency();
         currency1.setId(1L);
@@ -160,6 +173,28 @@ class CryptoCurrencyServiceTest {
 
         // then
         assertEquals(newList.get(0).getRateOfChange(), c1.getRateOfChange());
+    }
+
+    @Test
+    void should_Return_List_With_Negative_Rates_Of_Change_With_One_Element(){
+        // given
+        List<CryptoCurrency> list = cryptoCurrencyService.getAllCryptoCurrencies();
+        int filter = -1;
+        CryptoCurrency c1 = new CryptoCurrency();
+        CryptoCurrency c2 = new CryptoCurrency();
+        c1.setRateOfChange(BigDecimal.valueOf(-5L));
+        c2.setRateOfChange(BigDecimal.valueOf(100L));
+        list.add(c1);
+        list.add(c2);
+
+        // when
+        when(cryptoCurrencyService
+                .filterCryptoCurrenciesByRateOfChange(filter))
+                .thenReturn(list);
+
+        List<CryptoCurrency> newList = cryptoCurrencyService.filterCryptoCurrenciesByRateOfChange(filter);
+
+        // then
         assertEquals(newList.size(), 1);
     }
 }
