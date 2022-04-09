@@ -23,7 +23,6 @@ public class JsonParser implements IJsonParser {
             CryptoCurrency cryptoCurrency = new CryptoCurrency();
             JsonObject obj = jsonArray.get(i).getAsJsonObject();
             cryptoCurrency.setName(obj.get("name").getAsString());
-            cryptoCurrency.setRank(obj.get("rank").getAsInt());
             cryptoCurrency.setSymbol(obj.get("symbol").getAsString());
             cryptoCurrency.setPriceUsd(obj.get("priceUsd").getAsBigDecimal());
             cryptoCurrency.setRateOfChange(obj.get("changePercent24Hr").getAsBigDecimal());
@@ -59,7 +58,6 @@ public class JsonParser implements IJsonParser {
             CryptoCurrency cryptoCurrency = new CryptoCurrency();
             JsonObject obj = jsonArray.get(i).getAsJsonObject();
             cryptoCurrency.setName(obj.get("name").getAsString());
-            cryptoCurrency.setRank(++i);
             cryptoCurrency.setSymbol(obj.get("symbol").getAsString());
             cryptoCurrency.setPriceUsd(obj.getAsJsonObject("quote").getAsJsonObject("USD").get("price").getAsBigDecimal());
             cryptoCurrency.setRateOfChange(obj.getAsJsonObject("quote").getAsJsonObject("USD").get("percent_change_24h").getAsBigDecimal());

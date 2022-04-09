@@ -39,7 +39,6 @@ class CryptoCurrencyControllerTest {
         CryptoCurrency cryptoCurrency = new CryptoCurrency();
         cryptoCurrency.setId(1L);
         cryptoCurrency.setName("Polish Coin");
-        cryptoCurrency.setRank(69);
         cryptoCurrency.setSymbol("PL");
         cryptoCurrency.setPriceUsd(BigDecimal.valueOf(55));
         cryptoCurrency.setRateOfChange(BigDecimal.valueOf(10));
@@ -59,7 +58,6 @@ class CryptoCurrencyControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(cryptoCurrency.getId()))
                 .andExpect(jsonPath("$.name").value(cryptoCurrency.getName()))
-                .andExpect(jsonPath("$.rank").value(cryptoCurrency.getRank()))
                 .andExpect(jsonPath("$.symbol").value(cryptoCurrency.getSymbol()))
                 .andExpect(jsonPath("$.priceUsd").value(cryptoCurrency.getPriceUsd()))
                 .andExpect(jsonPath("$.rateOfChange").value(cryptoCurrency.getRateOfChange()));
@@ -70,7 +68,6 @@ class CryptoCurrencyControllerTest {
         CryptoCurrency c1 = new CryptoCurrency();
         c1.setId(1L);
         c1.setName("First Coin");
-        c1.setRank(1);
         c1.setSymbol("FC");
         c1.setPriceUsd(BigDecimal.valueOf(111));
         c1.setRateOfChange(BigDecimal.valueOf(11));
@@ -78,7 +75,6 @@ class CryptoCurrencyControllerTest {
         CryptoCurrency c2 = new CryptoCurrency();
         c2.setId(2L);
         c2.setName("Second Coin");
-        c2.setRank(2);
         c2.setSymbol("SC");
         c2.setPriceUsd(BigDecimal.valueOf(222));
         c2.setRateOfChange(BigDecimal.valueOf(22));
@@ -96,13 +92,11 @@ class CryptoCurrencyControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].id").value(c1.getId()))
                 .andExpect(jsonPath("$[0].name").value(c1.getName()))
-                .andExpect(jsonPath("$[0].rank").value(c1.getRank()))
                 .andExpect(jsonPath("$[0].symbol").value(c1.getSymbol()))
                 .andExpect(jsonPath("$[0].priceUsd").value(c1.getPriceUsd()))
                 .andExpect(jsonPath("$[0].rateOfChange").value(c1.getRateOfChange()))
                 .andExpect(jsonPath("$[1].id").value(c2.getId()))
                 .andExpect(jsonPath("$[1].name").value(c2.getName()))
-                .andExpect(jsonPath("$[1].rank").value(c2.getRank()))
                 .andExpect(jsonPath("$[1].symbol").value(c2.getSymbol()))
                 .andExpect(jsonPath("$[1].priceUsd").value(c2.getPriceUsd()))
                 .andExpect(jsonPath("$[1].rateOfChange").value(c2.getRateOfChange()));

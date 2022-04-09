@@ -22,12 +22,10 @@ public interface CryptoCurrencyRepository extends JpaRepository<CryptoCurrency, 
 
     @Transactional
     @Modifying
-    @Query(value = "UPDATE crypto_currencies c SET c.name = ?2, " +
-            "c.rank = ?3, c.symbol = ?4, " +
+    @Query(value = "UPDATE crypto_currencies c SET c.name = ?2, , c.symbol = ?4" +
             "c.priceUsd = ?5, c.rateOfChange = ?5 " +
             "WHERE c.id = ?1", nativeQuery = true)
-    void updateCryptoCurrency(Long id, String name,
-                              int rank, String symbol,
+    void updateCryptoCurrency(Long id, String name, String symbol,
                               BigDecimal priceUsd, BigDecimal rateOfChange);
 
     List<CryptoCurrency> findAll();

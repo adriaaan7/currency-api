@@ -49,8 +49,6 @@ public class ApiRequestService implements IApiRequestService {
             Response response = okHttpClient.newCall(request).execute();
             String responseContent = Objects.requireNonNull(response.body()).string();
             Gson gson = new GsonBuilder().create();
-            // @TODO
-            // \@return responseJson is not a json object now
             responseArray = gson.fromJson(responseContent, JsonArray.class);
             return responseArray;
         } catch (IOException e) {
