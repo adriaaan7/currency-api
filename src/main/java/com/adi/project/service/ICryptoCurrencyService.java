@@ -17,7 +17,7 @@ public interface ICryptoCurrencyService {
 
     List<CryptoCurrency> initAllCryptoCurrencies();
 
-    void updateCryptoCurrency(Long id, String name,String symbol,
+    void updateCryptoCurrency(Long id, String name,
                               BigDecimal priceUsd, BigDecimal rateOfChange);
 
     List<CryptoCurrency> updateAllCryptoCurrencies();

@@ -23,12 +23,9 @@ public class CryptoCurrencyController {
     @PostMapping("/add")
     @ResponseBody
     public CryptoCurrency addCryptoCurrency(@RequestParam(value = "name", required = true) String name,
-                                            @RequestParam(value = "symbol", required = true) String symbol,
                                             @RequestParam(value = "priceUsd", required = true) BigDecimal priceUsd,
                                             @RequestParam(value = "rateOfChange", required = true) BigDecimal rateOfChange){
         CryptoCurrency cryptoCurrency = new CryptoCurrency();
-        cryptoCurrency.setName(name);
-        cryptoCurrency.setSymbol(symbol);
         cryptoCurrency.setPriceUsd(priceUsd);
         cryptoCurrency.setRateOfChange(rateOfChange);
         return cryptoCurrencyService.saveCryptoCurrency(cryptoCurrency);

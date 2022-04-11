@@ -33,9 +33,7 @@ public class CryptoCurrencyToFileConverter implements ICryptoCurrencyToFileConve
             }
             FileWriter fileWriter = new FileWriter(file);
             for (CryptoCurrency cryptoCurrency : cryptoCurrencies) {
-                String symbol = cryptoCurrency.getSymbol();
                 BigDecimal rateOfChange = cryptoCurrency.getRateOfChange();
-                fileWriter.write(symbol);
                 fileWriter.write(" ");
                 if (cryptoCurrency.getId() == 100)
                     fileWriter.write(String.valueOf(rateOfChange));

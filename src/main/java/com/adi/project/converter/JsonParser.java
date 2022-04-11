@@ -23,7 +23,6 @@ public class JsonParser implements IJsonParser {
             CryptoCurrency cryptoCurrency = new CryptoCurrency();
             JsonObject obj = jsonArray.get(i).getAsJsonObject();
             cryptoCurrency.setName(obj.get("name").getAsString());
-            cryptoCurrency.setSymbol(obj.get("symbol").getAsString());
             cryptoCurrency.setPriceUsd(obj.get("priceUsd").getAsBigDecimal());
             cryptoCurrency.setRateOfChange(obj.get("changePercent24Hr").getAsBigDecimal());
             cryptoCurrency.setHosting(coinCapHosting);
@@ -41,7 +40,6 @@ public class JsonParser implements IJsonParser {
         {
             CryptoCurrency cryptoCurrency = new CryptoCurrency();
             JsonObject obj = jsonArray.get(i).getAsJsonObject();
-            cryptoCurrency.setSymbol(obj.get("pair").getAsString());
             cryptoCurrency.setPriceUsd(obj.get("price").getAsBigDecimal());
             cryptoCurrency.setRateOfChange(obj.get("percentChange24h").getAsBigDecimal());
             cryptoCurrency.setHosting(geminiHosting);
@@ -58,7 +56,6 @@ public class JsonParser implements IJsonParser {
             CryptoCurrency cryptoCurrency = new CryptoCurrency();
             JsonObject obj = jsonArray.get(i).getAsJsonObject();
             cryptoCurrency.setName(obj.get("name").getAsString());
-            cryptoCurrency.setSymbol(obj.get("symbol").getAsString());
             cryptoCurrency.setPriceUsd(obj.getAsJsonObject("quote").getAsJsonObject("USD").get("price").getAsBigDecimal());
             cryptoCurrency.setRateOfChange(obj.getAsJsonObject("quote").getAsJsonObject("USD").get("percent_change_24h").getAsBigDecimal());
             cryptoCurrency.setHosting(coinMarketCapHosting);
@@ -76,7 +73,6 @@ public class JsonParser implements IJsonParser {
             JsonObject obj = list.get(i);
             String name = obj.get("pair").getAsString().replaceAll("USD", "");
             cryptoCurrency.setName(name);
-            cryptoCurrency.setSymbol(name);
             cryptoCurrency.setPriceUsd(obj.get("price").getAsBigDecimal());
             cryptoCurrency.setRateOfChange(obj.get("percentChange24h").getAsBigDecimal());
             cryptoCurrency.setHosting(hosting);

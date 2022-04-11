@@ -62,9 +62,9 @@ public class CryptoCurrencyService implements ICryptoCurrencyService {
     }
 
     @Override
-    public void updateCryptoCurrency(Long id, String name, String symbol,
+    public void updateCryptoCurrency(Long id, String name,
                                      BigDecimal priceUsd, BigDecimal rateOfChange) {
-        cryptoCurrencyRepository.updateCryptoCurrency(id, name, symbol, priceUsd, rateOfChange);
+        cryptoCurrencyRepository.updateCryptoCurrency(id, name, priceUsd, rateOfChange);
     }
 
     @Override
@@ -75,7 +75,7 @@ public class CryptoCurrencyService implements ICryptoCurrencyService {
         int count = 0;
         for (int i = 0; i < list.size(); i++, count++){
             CryptoCurrency c = list.get(i);
-            updateCryptoCurrency(c.getId(), c.getName(), c.getSymbol(),
+            updateCryptoCurrency(c.getId(), c.getName(),
                     c.getPriceUsd(), c.getRateOfChange());
         }
         return list;

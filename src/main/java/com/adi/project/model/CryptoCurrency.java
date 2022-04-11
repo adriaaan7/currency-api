@@ -19,17 +19,15 @@ public class CryptoCurrency {
     private ApiHosting hosting;
 
     private String name;
-    private String symbol;
     private BigDecimal priceUsd;
     private BigDecimal rateOfChange;
 
     public CryptoCurrency() { }
 
-    public CryptoCurrency(Long id, ApiHosting hosting, String name, String symbol, BigDecimal priceUsd, BigDecimal rateOfChange) {
+    public CryptoCurrency(Long id, ApiHosting hosting, String name, BigDecimal priceUsd, BigDecimal rateOfChange) {
         this.id = id;
         this.hosting = hosting;
         this.name = name;
-        this.symbol = symbol;
         this.priceUsd = priceUsd;
         this.rateOfChange = rateOfChange;
     }
@@ -56,14 +54,6 @@ public class CryptoCurrency {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getSymbol() {
-        return symbol;
-    }
-
-    public void setSymbol(String symbol) {
-        this.symbol = symbol;
     }
 
     public BigDecimal getPriceUsd() {
